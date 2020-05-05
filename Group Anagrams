@@ -1,0 +1,14 @@
+object Solution {
+  def groupAnagrams(strs: Array[String]): List[List[String]] = {
+    var same = (for (e <- strs) yield {
+      e.sorted
+    }).toList.zipWithIndex.groupBy(_._1)
+    var d = for((k,v) <- same) yield {
+      v.map(_._2)
+    }
+    var stage = (for(e <- d) yield {
+      e.map(strs(_))
+    }).toList
+    stage
+  }
+}
