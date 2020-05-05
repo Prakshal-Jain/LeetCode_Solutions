@@ -1,0 +1,19 @@
+object Solution {
+  def canConstruct(ransomNote: String, magazine: String): Boolean = {
+    var m:List[Char] = magazine.toList
+    var s:List[Char] = List()
+    for(e <- ransomNote){
+      if(m.contains(e)){
+        val i = m.indexOf(e)
+        m = m.slice(0,i) ++ m.slice(i+1,m.length)
+        s = s :+ e
+      }
+    }
+    if(s == ransomNote.toList){
+      true
+    }
+    else{
+      false
+    }
+  }
+}
