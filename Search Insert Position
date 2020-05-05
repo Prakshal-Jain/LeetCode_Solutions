@@ -1,0 +1,15 @@
+object Solution {
+  def searchInsert(nums: Array[Int], target: Int): Int = {
+    if(nums.contains(target)){
+      nums.indexOf(target)
+    }
+    else{
+      if(nums.filter(_>target).toList.isEmpty){
+        nums.length
+      }
+      else{
+        nums.indexOf(nums.filter(_>target).toList.head)
+      }
+    }
+  }
+}
