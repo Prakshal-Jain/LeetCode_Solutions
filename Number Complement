@@ -1,0 +1,25 @@
+object Solution {
+  def findComplement(num: Int): Int = {
+    var binary = num.toBinaryString.toList
+    var n = 0
+    for(e <- binary){
+      if(e == '1'){
+        binary = binary.updated(n,'0')
+      }
+      else{
+        binary = binary.updated(n,'1')
+      }
+      n += 1
+    }
+
+    for(e <- binary if e.toInt == 0){
+        binary = binary.slice(0,1)
+      }
+
+    var s = ""
+    for(e <- binary){
+      s += e
+    }
+    Integer.parseInt(s,2)
+  }
+}
