@@ -1,0 +1,17 @@
+object Solution {
+  def isPalindrome(x: Int): Boolean = {
+    val toList_forward =  ((Stream.iterate(x)(_/10)takeWhile(_!=0)map(_%10)).toList).reverse
+    val toList_reverse = ((Stream.iterate(x)(_/10)takeWhile(_!=0)map(_%10)).toList)
+    if(x >= 0) {
+      if (toList_forward == toList_reverse) {
+        true
+      }
+      else {
+        false
+      }
+    }
+    else{
+      false
+    }
+  }
+}
