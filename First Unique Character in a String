@@ -1,0 +1,24 @@
+object Solution {
+  def firstUniqChar(s: String): Int = {
+    var l:List[Char] = (for(e <- s) yield {
+      e
+    }).toList
+    var uni:List[Char] = List()
+    while(l.nonEmpty){
+      val h = l.head
+      l = l.tail
+      if(l.contains(h)){
+        l = l.filterNot(_ == h)
+      }
+      else{
+        uni = uni :+ h
+      }
+    }
+    if(uni.isEmpty){
+      -1
+    }
+    else{
+      s.indexOf(uni.head)
+    }
+  }
+}
