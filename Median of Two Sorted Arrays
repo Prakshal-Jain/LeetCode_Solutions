@@ -1,0 +1,16 @@
+object Solution {
+  def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {
+    val total_array = (nums1 ++ nums2).sorted
+    if (total_array.length % 2 != 0){
+      println("odd")
+      var ind:Int = math.ceil(total_array.length/2).toInt
+      total_array(ind)
+    }
+    else{
+      println("even")
+      var c = math.ceil(total_array.length/2).toInt
+      var s:Double = (total_array(c)+total_array(c-1))
+      s/2
+    }
+  }
+}
