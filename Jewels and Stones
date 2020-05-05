@@ -1,0 +1,11 @@
+object Solution {
+  def numJewelsInStones(J: String, S: String): Int = {
+    var n = 0
+    for(e <- S){
+      if(J.contains(e)){
+        n += 1
+      }
+    }
+    n
+  }
+}
