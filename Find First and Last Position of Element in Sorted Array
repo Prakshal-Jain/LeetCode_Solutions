@@ -1,0 +1,21 @@
+object Solution {
+  def searchRange(nums: Array[Int], target: Int): Array[Int] = {
+    var s:List[Int] = List()
+    var n = 0
+    if(!nums.contains(target)){
+      Array(-1,-1)
+    }
+    else{
+      for(e <- nums){
+        if (e == target){
+          s = s :+ n
+          n += 1
+        }
+        else{
+          n += 1
+        }
+      }
+      Array(s.head,s.last)
+    }
+  }
+}
