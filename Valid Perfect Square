@@ -1,0 +1,11 @@
+object Solution {
+  def isPerfectSquare(num: Int): Boolean = {
+    var s:Double = math.sqrt(num)
+    if(s == math.floor(s)){
+      true
+    }
+    else{
+      false
+    }
+  }
+}
