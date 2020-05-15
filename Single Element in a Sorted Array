@@ -1,0 +1,10 @@
+object Solution {
+  def singleNonDuplicate(nums: Array[Int]): Int = {
+    var s = nums.distinct
+    var n = 0
+    for(e <- s if nums.count(_ == e) == 1){
+      n = e
+    }
+    n
+  }
+}
