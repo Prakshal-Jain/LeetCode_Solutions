@@ -1,0 +1,27 @@
+object Solution {
+  def firstMissingPositive(nums: Array[Int]): Int = {
+    val arr = nums.sorted.filterNot(_ <= 0).distinct
+    var found = false
+    var setNum = 0
+    if(arr.isEmpty){
+      1
+    }
+    else {
+      if (arr.head != 1) {
+        found = true
+        setNum = 1
+      }
+      for (e <- 0 until arr.length - 1 if !found) {
+        if (arr(e + 1) != arr(e) + 1) {
+          found = true
+          setNum = arr(e) + 1
+        }
+      }
+      if (!found) {
+        setNum = arr.last + 1
+        found = true
+      }
+      setNum
+    }
+  }
+}
