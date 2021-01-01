@@ -1,0 +1,33 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def removeNthFromEnd(head: ListNode, n: Int): ListNode = {
+    var i = 0
+    var currNode = head
+    while(currNode != null){
+      currNode = currNode.next
+      i += 1
+    }
+    i = i - n
+    if(i < 0){
+      head
+    }
+    else if(i == 0){
+      currNode = head.next
+      currNode
+    }
+    else{
+      currNode = head
+      for(j <- 0 until i-1){
+        currNode = currNode.next
+      }
+      currNode.next = currNode.next.next
+      head
+    }
+  }
+}
