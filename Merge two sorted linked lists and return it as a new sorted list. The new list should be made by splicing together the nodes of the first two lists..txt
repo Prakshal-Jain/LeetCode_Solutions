@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def mergeTwoLists(l1: ListNode, l2: ListNode): ListNode = {
+    var lis1 = l1
+    var lis2 = l2
+    if(l1 == null){
+      l2
+    }
+    else if(l2 == null){
+      l1
+    }
+    else{
+      //Smallest of 2 lists
+      var smaller = l1
+      if(l2.x <= l1.x){
+        smaller = l2
+        lis2 = lis2.next
+      }
+      else{
+        lis1 = lis1.next
+      }
+      val head = smaller
+      while(lis1 != null && lis2 != null){
+        if(lis1.x <= lis2.x){
+          smaller.next = lis1
+          smaller = smaller.next
+          lis1 = lis1.next
+        }
+        else{
+          smaller.next = lis2
+          smaller = smaller.next
+          lis2 = lis2.next
+        }
+      }
+      //Add remaining list items
+      if(lis1 != null){
+        while(lis1 != null){
+          smaller.next = lis1
+          smaller = smaller.next
+          lis1 = lis1.next
+        }
+      }
+      else{
+        while(lis2 != null){
+          smaller.next = lis2
+          smaller = smaller.next
+          lis2 = lis2.next
+        }
+      }
+      head
+    }
+  }
+}
+
+//I am not very satisfied with this code. I think it has a lot of redundency which can be simplified. I will further work on it and update the changes :)
