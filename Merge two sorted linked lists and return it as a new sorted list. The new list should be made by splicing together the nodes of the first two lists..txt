@@ -58,4 +58,4 @@ object Solution {
   }
 }
 
-//I am not very satisfied with this code. I think it has a lot of redundency which can be simplified. I will further work on it and update the changes :)
+//I am not very satisfied with this code. I think it has a lot of redundancy which can be simplified. I will further work on it and update the changes :)
