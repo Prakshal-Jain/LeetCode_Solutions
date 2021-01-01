@@ -1,0 +1,26 @@
+object Solution {
+  def longestCommonPrefix(strs: Array[String]): String = {
+    if(strs.isEmpty){
+      ""
+    }
+    else{
+      var arr = strs.sortBy(_.length)
+      val smallest = arr.head
+      arr = arr.tail
+      var saveCommon = ""
+      var stop = false
+      for(e <- smallest.indices if !stop){
+        val currChar = smallest(e)
+        for(str <- arr){
+          if(currChar != str(e)){
+            stop = true
+          }
+        }
+        if(!stop){
+          saveCommon += currChar
+        }
+      }
+      saveCommon
+    }
+  }
+}
