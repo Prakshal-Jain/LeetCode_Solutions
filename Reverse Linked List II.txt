@@ -1,0 +1,66 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def reverseSubList(head: ListNode, end: Int): ListNode = {
+    if(end == 1){
+      head
+    }
+    else {
+      var currNode = head
+      var prev: ListNode = null
+      for (i <- 1 until end) {
+        currNode = currNode.next
+      }
+      val lastNode = currNode
+      currNode = head
+      while (currNode != lastNode) {
+        var temp = currNode.next
+        currNode.next = prev
+        prev = currNode
+        currNode = temp
+      }
+      //Invert the next 2 nodes
+      if (currNode != null) {
+        head.next = lastNode.next
+        val sve = prev
+        prev = lastNode
+        prev.next = sve
+      }
+      prev
+    }
+  }
+
+  def reverseBetween(head: ListNode, m: Int, n: Int): ListNode = {
+    if(m == n || head == null || head.next == null){
+      head
+    }
+    else{
+      //Walk through the list & stop just a node before m
+      var startNode = head
+      for(i <- 1 until m-1){
+        startNode = startNode.next
+      }
+      //Set previous node
+      var prev:ListNode = startNode
+      if(m == 1){
+        prev = null
+      }
+      else{
+        startNode = startNode.next
+      }
+      val reversed = reverseSubList(startNode, n-m+1)
+      if(prev != null){
+        prev.next = reversed
+        head
+      }
+      else{
+        reversed
+      }
+    }
+  }
+}
