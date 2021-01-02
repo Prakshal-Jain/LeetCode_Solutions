@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(var _x: Int = 0) {
+ *   var next: ListNode = null
+ *   var x: Int = _x
+ * }
+ */
+
+object Solution {
+  def hasCycle(head: ListNode): Boolean = {
+    var lis:List[ListNode] = List()
+    var currNode = head
+    var isFound = false
+    while(!isFound && currNode != null){
+      if(lis.contains(currNode)){
+        isFound = true
+      }
+      else{
+        lis = lis :+ currNode
+      }
+      currNode = currNode.next
+    }
+    isFound
+  }
+}
