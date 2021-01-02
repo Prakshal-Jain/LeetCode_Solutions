@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def numComponents(head: ListNode, G: Array[Int]): Int = {
+    var currNode = head
+    var connectedComp = 0
+    while(currNode != null){
+      if(G.contains(currNode.x)){
+        while(currNode!= null && G.contains(currNode.x)){
+          currNode = currNode.next
+        }
+        connectedComp += 1
+      }
+      else{
+        currNode = currNode.next
+      }
+    }
+    connectedComp
+  }
+}
