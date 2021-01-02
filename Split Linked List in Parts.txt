@@ -1,0 +1,56 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def splitListToParts(root: ListNode, k: Int): Array[ListNode] = {
+    var size = 0
+    var arr:Array[ListNode] = Array()
+    var currNode = root
+    while(currNode != null){
+      currNode = currNode.next
+      size += 1
+    }
+    val norm_size = size / k
+    val num_larger_size = size % k
+    val num_smaller_size = k - num_larger_size
+    var save_ref = root
+    var nxtNode:ListNode = root
+    for(i <- 0 until num_larger_size){
+      var j = 1
+      arr = arr :+ nxtNode
+      while(j <= norm_size){
+        nxtNode = nxtNode.next
+        j += 1
+      }
+      save_ref = nxtNode
+      nxtNode = save_ref.next
+      save_ref.next = null
+    }
+    if(norm_size != 0) {
+      //Do same for smaller List
+      for (i <- 0 until num_smaller_size) {
+        var j = 1
+        arr = arr :+ nxtNode
+        while (j < norm_size) {
+          nxtNode = nxtNode.next
+          j += 1
+        }
+        save_ref = nxtNode
+        nxtNode = save_ref.next
+        save_ref.next = null
+      }
+    }
+    else{
+      var remaining = k - arr.length
+      while(remaining != 0){
+        arr = arr :+ null
+        remaining -= 1
+      }
+    }
+    arr
+  }
+}
