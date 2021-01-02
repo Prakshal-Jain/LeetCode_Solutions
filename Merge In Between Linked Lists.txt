@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def mergeInBetween(list1: ListNode, a: Int, b: Int, list2: ListNode): ListNode = {
+    if(a == b){
+      //If a is 1 --> Remove head node, and add whole list
+      var trav_2 = list2
+      while (trav_2.next != null) {
+        trav_2 = trav_2.next
+      }
+      var currNode = list1
+      var prev:ListNode = null
+      for (i <- 0 until a) {
+        prev = currNode
+        currNode = currNode.next
+      }
+      prev.next = list2
+      trav_2.next = currNode.next
+      list1
+    }
+    else {
+      //Save node ref for a-1, b
+      var prev: ListNode = null
+      var currNode = list1
+      var saveA_prev: ListNode = null
+      for (i <- 0 until b) {
+        if (i == a) {
+          saveA_prev = prev
+        }
+        prev = currNode
+        currNode = currNode.next
+      }
+      var trav_2 = list2
+      saveA_prev.next = trav_2
+      if (trav_2 == null) {
+        saveA_prev.next = currNode.next
+      }
+      else {
+        while (trav_2.next != null) {
+          trav_2 = trav_2.next
+        }
+        trav_2.next = currNode.next
+      }
+      list1
+    }
+  }
+}
