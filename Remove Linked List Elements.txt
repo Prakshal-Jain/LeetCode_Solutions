@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def removeElements(head: ListNode, `val`: Int): ListNode = {
+    var currNode = head
+    var startPoint = head
+    if(head != null && head.x == `val`){
+      while(currNode != null && currNode.x == `val`){
+        currNode = currNode.next
+      }
+      startPoint = currNode
+    }
+    while(currNode != null && currNode.next != null){
+      if(currNode.next.x == `val`){
+        while(currNode.next != null && currNode.next.x == `val`){
+          currNode.next = currNode.next.next
+        }
+      }
+      currNode = currNode.next
+    }
+    startPoint
+  }
+}
