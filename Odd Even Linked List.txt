@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def oddEvenList(head: ListNode): ListNode = {
+    if(head == null || head.next == null){
+      head
+    }
+    else {
+      var oddPointer = head
+      var evenPointer = head.next
+      val saveStart = evenPointer
+      while(oddPointer != null && evenPointer != null && oddPointer.next != null && evenPointer.next != null){
+        var nextOddPtr = oddPointer.next.next
+        var nextEvenPtr = evenPointer.next.next
+        oddPointer.next = nextOddPtr
+        evenPointer.next = nextEvenPtr
+        oddPointer = nextOddPtr
+        evenPointer = nextEvenPtr
+      }
+      oddPointer.next = saveStart
+      head
+    }
+  }
+}
