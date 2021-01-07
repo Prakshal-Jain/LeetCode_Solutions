@@ -1,0 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def updateNextSmallest(head: ListNode, target: Int): ListNode = {
+    if(head == null || head.x < target){
+      return head
+    }
+    var currNode = head
+    while(currNode.next != null){
+      if(currNode.next.x < target){
+        val sve = currNode.next
+        currNode.next = currNode.next.next
+        sve.next = head
+        return sve
+      }
+      currNode = currNode.next
+    }
+    head
+  }
+
+  def partition(head: ListNode, x: Int): ListNode = {
+    if(head == null || head.next == null){
+      return head
+    }
+    var currNode = head
+    var counter = 0
+    while(currNode != null){
+      counter += 1
+      currNode = currNode.next
+    }
+    val headNode = updateNextSmallest(head, x)
+    currNode = headNode
+    for(i <- 0 until counter){
+      currNode.next = updateNextSmallest(currNode.next, x)
+      currNode = currNode.next
+    }
+    headNode
+  }
+}
