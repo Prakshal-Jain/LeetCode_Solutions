@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+
+import scala.collection.mutable.ListBuffer
+
+object Solution {
+  def reorderList(head: ListNode): Unit = {
+    if(head == null){
+    }
+    else {
+      val storeElem: ListBuffer[ListNode] = ListBuffer()
+      var currNode = head
+      var idx = 0
+      while (currNode != null) {
+        storeElem.insert(idx, currNode)
+        idx += 1
+        currNode = currNode.next
+      }
+      idx = 0
+      val len = storeElem.length - 1
+      for (e <- storeElem if idx < len / 2) {
+        val temp = e.next
+        e.next = storeElem(len - idx)
+        storeElem(len - idx).next = temp
+        idx += 1
+      }
+      if ((len + 1) % 2 == 0) {
+        storeElem((len / 2) + 1).next = null
+      }
+      else {
+        storeElem(len / 2).next = null
+      }
+    }
+  }
+}
