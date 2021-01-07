@@ -1,0 +1,39 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+object Solution {
+  def replaceSmallestValue(head: ListNode): Unit = {
+    var currNode = head
+    var smallest = head
+    while(currNode != null){
+      if(currNode.x < smallest.x){
+        smallest = currNode
+      }
+      currNode = currNode.next
+    }
+    val saveHead = smallest.x
+    smallest.x = head.x
+    head.x = saveHead
+  }
+
+  def sortList(head: ListNode): ListNode = {
+    if(head != null) {
+      var currNode = head
+      replaceSmallestValue(currNode)
+      val saveHead = currNode
+      currNode = currNode.next
+      while (currNode != null) {
+        replaceSmallestValue(currNode)
+        currNode = currNode.next
+      }
+      saveHead
+    }
+    else{
+      null
+    }
+  }
+}
