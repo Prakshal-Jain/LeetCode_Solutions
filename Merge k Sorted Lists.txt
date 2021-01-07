@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode(_x: Int = 0, _next: ListNode = null) {
+ *   var next: ListNode = _next
+ *   var x: Int = _x
+ * }
+ */
+
+import scala.collection.mutable.ListBuffer
+object Solution {
+  def findSmallestListNode(headList: ListBuffer[ListNode]): (ListNode, Int) = {
+    if(headList.isEmpty){
+      return (null, -1)
+    }
+    var smallest = headList.find(_ != null).head
+    for(e <- headList){
+      if(e != null && e.x < smallest.x){
+        smallest = e
+      }
+    }
+    val index = headList.indexOf(smallest)
+    headList(index) = smallest.next
+    (smallest, index)
+  }
+
+  def mergeKLists(lists: Array[ListNode]): ListNode = {
+    if(lists.isEmpty || lists.count(_ == null) == lists.length){
+      return null
+    }
+    val currNodeList: ListBuffer[ListNode] = ListBuffer.tabulate(lists.length)(lists)
+    val newHead = new ListNode(findSmallestListNode(currNodeList)._1.x, null)
+    var currNode = newHead
+    while(currNodeList.count(_ == null) != currNodeList.length){
+      val sve = new ListNode(findSmallestListNode(currNodeList)._1.x, null)
+      currNode.next = sve
+      currNode = currNode.next
+    }
+    newHead
+  }
+}
