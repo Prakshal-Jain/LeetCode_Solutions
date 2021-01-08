@@ -1,0 +1,65 @@
+/**
+ * Definition for a Node.
+ * class Node(var _value: Int) {
+ *   var value: Int = _value
+ *   var prev: Node = null
+ *   var next: Node = null
+ *   var child: Node = null
+ * }
+ */
+import scala.collection.mutable
+object Solution {
+  def helperFlat(head: Node, stack: mutable.Stack[Node]): (Node, Node) = {
+    var currNode = head.next
+    if(head.child != null){
+      currNode = head.child
+      if(head.next != null){
+        stack.push(head.next)
+      }
+    }
+    val buildList = new Node(head.value)
+    var backup = buildList
+    var prev = head
+    while(currNode != null){
+      if(currNode.child != null){
+        if(currNode.next != null){
+          stack.push(currNode.next)
+        }
+        backup.next = new Node(currNode.value)
+        currNode = currNode.child
+      }
+      else{
+        if(currNode.next != null){
+          backup.next = new Node(currNode.value)
+          currNode = currNode.next
+        }
+        else{
+          backup.next = new Node(currNode.value)
+          currNode = null
+        }
+      }
+      backup.prev = prev
+      prev = backup
+      backup = backup.next
+    }
+    backup.prev = prev
+    buildList.prev = null
+    (buildList, backup)
+  }
+
+  def flatten(head: Node): Node = {
+    if(head == null){
+      return null
+    }
+    val stack: mutable.Stack[Node] = mutable.Stack()
+    val headNode = helperFlat(head, stack)
+    var saveLastTail = headNode._2
+    while(stack.nonEmpty){
+      val newH = helperFlat(stack.pop(), stack)
+      saveLastTail.next = newH._1
+      newH._1.prev = saveLastTail
+      saveLastTail = newH._2
+    }
+    headNode._1
+  }
+}
