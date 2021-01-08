@@ -1,0 +1,27 @@
+object Solution {
+  def decideCommon(first: Array[Int], second:Array[Int]): Array[Int] = {
+    val minim = math.max(first(0), second(0))
+    val maxim = math.min(first(1), second(1))
+    if(first(1) >= second(0) && first(0) <= second(1)){
+      Array(minim, maxim)
+    }
+    else{
+      null
+    }
+  }
+
+  def intervalIntersection(A: Array[Array[Int]], B: Array[Array[Int]]): Array[Array[Int]] = {
+    val smaller = if(A.length < B.length) A else B
+    val larger = if(A.length >= B.length) A else B
+    var commonArr: Array[Array[Int]] = Array()
+    for(i <- smaller.indices){
+      for(e <- larger){
+        val common: Array[Int] = decideCommon(smaller(i), e)
+        if(common != null){
+          commonArr = commonArr :+ common
+        }
+      }
+    }
+    commonArr
+  }
+}
