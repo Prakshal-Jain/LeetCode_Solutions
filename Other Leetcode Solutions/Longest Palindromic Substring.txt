@@ -1,0 +1,34 @@
+object Solution {
+  def isPalindrome(str: String): Boolean = {
+    var i = 0
+    var j = str.length-1
+    while(i < j){
+      if(str(i) != str(j)){
+        return false
+      }
+      i += 1
+      j -= 1
+    }
+    true
+  }
+
+  def longestPalindrome(s: String): String = {
+    var maxSize = ""
+    for(i <- s.indices) {
+      var j = s.length-1
+      while(j > i){
+        if(s(i) == s(j)){
+          val st = s.substring(i, j+1)
+          if(isPalindrome(st) && st.length > maxSize.length){
+            maxSize = st
+          }
+        }
+        j -= 1
+      }
+    }
+    if(s.length > 0 && maxSize == ""){
+      maxSize = s.head.toString
+    }
+    maxSize
+  }
+}
