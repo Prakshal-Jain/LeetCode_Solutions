@@ -1,0 +1,32 @@
+import scala.collection.mutable
+object Solution {
+  def isValid(s: String): Boolean = {
+    val stack: mutable.Stack[Char] = mutable.Stack()
+    val charMap:Map[Char, Char] = Map('{' -> '}', '(' -> ')', '[' -> ']')
+    var dec = true
+    for(c <- s){
+      if(charMap.contains(c)){
+        stack.push(c)
+      }
+      else if(charMap.values.toList.contains(c)){
+        if(stack.nonEmpty){
+          if(charMap(stack.head) == c){
+            stack.pop()
+          }
+          else{
+            dec = false
+          }
+        }
+        else{
+          dec = false
+        }
+      }
+    }
+    if(dec){
+      stack.isEmpty
+    }
+    else{
+      false
+    }
+  }
+}
