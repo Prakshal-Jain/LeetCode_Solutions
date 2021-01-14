@@ -1,0 +1,38 @@
+def helperFiller(matrix, arr, length, width):
+    i = length[0]
+    while(i <= length[1]):
+        arr.append(matrix[width[0]][i])
+        i += 1
+    j = width[0] + 1
+    while(j <= width[1]):
+        arr.append(matrix[j][length[1]])
+        j += 1
+    j = width[1]
+    i = length[1]-1
+    while(i >= length[0]):
+        arr.append(matrix[j][i])
+        i -= 1
+    i = length[0]
+    j = width[1]-1
+    while(j > width[0]):
+        arr.append(matrix[j][i])
+        j -= 1
+
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        width = [0, len(matrix)-1]
+        if(width[1] <= 0):
+            return matrix if (width[1] < 0) else matrix[0]
+        length = [0, len(matrix[0])-1]
+        retArr = []
+        length = [0, len(matrix[0])-1]
+        while(length[0] <= length[1] and width[0] <= width[1]):
+            helperFiller(matrix, retArr, length, width)
+            length[0] += 1
+            length[1] -= 1
+            width[0] += 1
+            width[1] -= 1
+        while(retArr[len(retArr)-1] in retArr[:len(retArr)-1]):
+            retArr.pop(len(retArr)-1)
+        return retArr
