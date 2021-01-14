@@ -1,0 +1,18 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: int(x[0]))
+        retArr = []
+        indices = len(intervals)
+        count = 0
+        while(count < indices):
+            last = len(retArr)-1
+            if(last == -1):
+                retArr.append(intervals[count])
+            else:
+                if(retArr[last][1] >= intervals[count][0]):
+                    retArr[last][0] = min(retArr[last][0], intervals[count][0])
+                    retArr[last][1] = max(retArr[last][1], intervals[count][1])
+                else:
+                    retArr.append(intervals[count])
+            count += 1
+        return retArr
