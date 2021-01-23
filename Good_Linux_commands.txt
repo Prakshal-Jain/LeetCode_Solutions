@@ -1,0 +1,1 @@
+Generate PDF from text file: vim bash.txt -c "hardcopy > example.ps | q"; ps2pdf example.ps
