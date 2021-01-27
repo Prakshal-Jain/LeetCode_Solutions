@@ -1,1 +1,4 @@
 Generate PDF from text file: vim bash.txt -c "hardcopy > example.ps | q"; ps2pdf example.ps
+
+I-Type Instructions Opcodes: https://www.d.umn.edu/~gshute/mips/itype.xhtml
+R-Type Instructions Opcodes: https://www.d.umn.edu/~gshute/mips/rtype.xhtml
